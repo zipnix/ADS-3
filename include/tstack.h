@@ -1,17 +1,17 @@
 // Copyright 2021 NNTU-CS
-#ifndef INCLUDE_STACK_H_
-#define INCLUDE_STACK_H_
+#ifndef INCLUDE_TSTACK_H_
+#define INCLUDE_TSTACK_H_
 
-const int size=100;
+const int size = 100;
 
 template<typename type>
 class TStack {
-   private:
+ private:
      type arr[size];
-     int top;
-   public:
+     int top;  
+ public:
      TStack() : top(-1) { }
-     type get() const { 
+     type get() const {
         return arr[top];
      }
      bool isEmpty() const {
@@ -21,12 +21,12 @@ class TStack {
         return top == size - 1;
      }
      void pop() {
-        if(top >= 0)
+        if (top >= 0)
           top--;
      }
      void push(type item) {
-       if(top < size - 1)
+       if (top < size - 1)
          arr[++top] = item;
      }
 };
-#endif  // INCLUDE_STACK_H_
+#endif  // INCLUDE_TSTACK_H_
