@@ -26,7 +26,7 @@ TEST(lab3, test2_1) {
     EXPECT_TRUE(out == exp);
 }
 
-TEST(lab3, test2_2){
+TEST(lab3, test2_2) {
     std::string exp = "2 1 - 6 2 + *";
     int out = eval(exp);
     EXPECT_EQ(out, 8);

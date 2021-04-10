@@ -8,7 +8,7 @@ template<typename type>
 class TStack {
  private:
      type arr[size];
-     int top;  
+     int top;
  public:
      TStack() : top(-1) { }
      type get() const {
