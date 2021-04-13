@@ -1,5 +1,14 @@
 # Алгоритмы и структуры данных (ADS-3)
 
+![GitHub pull requests](https://img.shields.io/github/issues-pr/NNTU-CS/ADS-3)
+![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/NNTU-CS/ADS-3)
+
+Сроки выполнения задания:
+
+- **ИСТ-1,2,3** - **до 25 апреля** ![Relative date](https://img.shields.io/date/1619384400)
+- **ИСТ-4** - **до 28 апреля** ![Relative date](https://img.shields.io/date/1619643600)
+
+
 ## Задание
 
 > Написать реализацию алгоритмов перевода арифметического выражения из инфиксной формы в постфиксную и вычисления выражения, записанного в постфиксной форме.
