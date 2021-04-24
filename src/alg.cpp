@@ -66,7 +66,7 @@ int eval(std::string pst) {
       stack.pop();
       int b = stack.get();
       stack.pop()
-        stack.push(oper p, a , b);
+        stack.push(oper(p, a , b));
     }
   }
   return stack2.get();
