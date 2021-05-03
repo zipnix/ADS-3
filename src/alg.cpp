@@ -2,7 +2,7 @@
 #include <string>
 #include "tstack.h"
 
-int prior(char p) {
+int pr(char p) {
   if ((p == '-') || (p == '+'))
     return 2;
   if ((p == '*') || (p == '/'))
@@ -25,50 +25,54 @@ int oper(char p, int a, int b) {
     return a / b;
 }
 std::string infx2pstfx(std::string inf) {
-  TStack <char> stack1;
+  TStack <char> st1;
   std::string res_str;
   for (int i = 0; i < inf.length(); i++) {
-    if ((int[i] >= '0') && (int[i] <= '9')) {
-      res_str += int[i];
+    if ((inf[i] >= '0') && (inf[i] <= '9')) {
+      res_str += inf[i];
       res_str += ' ';
-    }
-    else if ((int[i] == '(') || (prior(int[i]) > prior(stack1.get())) || (stack1.isEmpty()))
-      stack1.push(inf[i]);
-    else if (int[i] == ')') {
-      while (stack1.get() != '(' && !stack1.isEmpty()) {
-        res_str += stack1.get();
-        res_str += ' ';
-        stack1.pop();
-      }
-    }
-      else {
-        while ((prior(int[i]) <= prior(stack1.get())) && (!stack1.isEmpty())) {
-          res_str += stack1.get();
+    } else {
+      if ((inf[i] == '(') || (pr(inf[i]) > pr(st1.get())) || (st1.isEmpty())) {
+        st1.push(inf[i]);
+      } 
+    } else {
+      if (inf[i] == ')') {
+        while (st1.get() != '(' && !st1.isEmpty()) {
+          res_str += st1.get();
           res_str += ' ';
-          stack1.pop();
+          st.pop();
         }
-        stack1.push(inf[i]);
       }
+    } else {
+      while ((pr(inf[i]) <= pr(st1.get())) && (!st1.isEmpty())) {
+        res_str += st1.get();
+        res_str += ' ';
+        st1.pop();
+      }
+      st1.push(inf[i]);
+    }
   }
-  while (!stack1.isEmpty()) {
-    res_str += stack1.get();
+  while (!st1.isEmpty()) {
+    res_str += st1.get();
     res_str += ' ';
-    stack1.pop();
+    st1.pop();
   }
   return res_str;
 }
 int eval(std::string pst) {
-   TStack <int> stack2;
-  for (i = 0; i < pst.length(); i++) {
+  TStack <int> st2;
+  for (int i = 0; i < pst.length(); i++) {
     if ((pst[i] >= '0') && (pst[i] <= '9'))
-      stack2.push(pst[i] - '0');
-    else if (pst[i] != ' ') {
-      int a = stack2.get();
-      stack2.pop();
-      int b = stack2.get();
-      stack2.pop()
-        stack2.push(oper(p, a , b));
+      st2.push(pst[i] - '0');
+    else {
+      if (pst[i] != ' ') {
+        int a = st2.get();
+        st2.pop();
+        int b = st2.get();
+        st2.pop()
+          st2.push(oper(p, a , b));
+      }
     }
   }
-  return stack2.get();
+  return st2.get();
 }
