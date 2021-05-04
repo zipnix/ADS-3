@@ -31,19 +31,17 @@ std::string infx2pstfx(std::string inf) {
     if ((inf[i] >= '0') && (inf[i] <= '9')) {
       res_str += inf[i];
       res_str += ' ';
-    } else {
-      if ((inf[i] == '(') || (pr(inf[i]) > pr(st1.get())) || (st1.isEmpty())) {
-        st1.push(inf[i]);
-      } 
-    } else {
-      if (inf[i] == ')') {
-        while (st1.get() != '(' && !st1.isEmpty()) {
-          res_str += st1.get();
-          res_str += ' ';
-          st.pop();
-        }
+    } else if ((inf[i] == '(') || (pr(inf[i]) > pr(st1.get())) || (st1.isEmpty())) {
+      st1.push(inf[i]);
       }
-    } else {
+    else if (inf[i] == ')') {
+      while (st1.get() != '(' && !st1.isEmpty()) {
+        res_str += st1.get();
+        res_str += ' ';
+        st1.pop();
+      }
+    }
+    else {
       while ((pr(inf[i]) <= pr(st1.get())) && (!st1.isEmpty())) {
         res_str += st1.get();
         res_str += ' ';
@@ -64,14 +62,12 @@ int eval(std::string pst) {
   for (int i = 0; i < pst.length(); i++) {
     if ((pst[i] >= '0') && (pst[i] <= '9'))
       st2.push(pst[i] - '0');
-    else {
-      if (pst[i] != ' ') {
-        int a = st2.get();
-        st2.pop();
-        int b = st2.get();
-        st2.pop()
-          st2.push(oper(p, a , b));
-      }
+    else if (pst[i] != ' ') {
+      int a = st2.get();
+      st2.pop();
+      int b = st2.get();
+      st2.pop();
+      st2.push(oper(p, a , b));
     }
   }
   return st2.get();
