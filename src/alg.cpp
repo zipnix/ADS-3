@@ -60,15 +60,15 @@ std::string infx2pstfx(std::string inf) {
 int eval(std::string pst) {
   TStack <int> s2;
   for (int i = 0; i < pst.length(); i++) {
-    if ((pst[i] >= '0') && (pst[i] <= '9'))
+    if ((pst[i] >= '0') && (pst[i] <= '9')) {
       s2.push(pst[i] - '0');
-    else if (pst[i] != ' '
+    } else if (pst[i] != ' '
             ) {
       int a = s2.get();
       s2.pop();
       int b = s2.get();
       s2.pop();
-      s2.push(oper(p, a , b));
+      s2.push(oper(pst[i], a , b));
     }
   }
   return s2.get();
