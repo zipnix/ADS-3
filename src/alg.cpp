@@ -18,6 +18,21 @@ int pt(char p) {
       return -1;
   }
 }
+int oper(char o, int a, int b) {
+switch (o) {
+case '+':
+return a + b;
+break;
+case '-':
+return a - b;
+break;
+case '*':
+return a * b;
+break;
+case '/':
+return a / b;
+break;
+}
 std::string infx2pstfx(std::string inf) {
   TStack <char> s1;
   std::string res_str;
@@ -25,11 +40,9 @@ std::string infx2pstfx(std::string inf) {
     if ((inf[i] >= '0') && (inf[i] <= '9')) {
       res_str += inf[i];
       res_str += ' ';
-    } else if ((inf[i] == '(') || (pt(inf[i]) > pt(s1.get())) || (s1.isEmpty())
-              ) {
+    } else if (inf[i] == '(' || pt(inf[i]) > pt(s1.get()) || s1.isEmpty()) {
       s1.push(inf[i]);
-      } else if (inf[i] == ')'
-                ) {
+      } else if (inf[i] == ')') {
       while (s1.get() != '(' && !s1.isEmpty()) {
         res_str += s1.get();
         res_str += ' ';
@@ -39,7 +52,7 @@ std::string infx2pstfx(std::string inf) {
         s1.pop();
       }
     } else {
-      while ((pt(inf[i]) <= pt(s1.get())) && (!s1.isEmpty())) {
+      while (pt(inf[i]) <= pt(s1.get()) && !s1.isEmpty()) {
         res_str += s1.get();
         res_str += ' ';
         s1.pop();
@@ -52,9 +65,13 @@ std::string infx2pstfx(std::string inf) {
     res_str += ' ';
     s1.pop();
   }
+  while (res_str[res_str.length() - 1] == ' ') {
+        res_str = res_str.substr(0, res_str.length()-1);
+  }
   return res_str;
 }
 int eval(std::string pst) {
+  int oper(char
   TStack <int> s2;
   for (int i = 0; i < pst.length(); i++) {
     if ((pst[i] >= '0') && (pst[i] <= '9')) {
@@ -65,15 +82,7 @@ int eval(std::string pst) {
       s2.pop();
       int b = s2.get();
       s2.pop();
-      if (pst[i] == '+') {
-        s2.push(b-a);
-      } else if (pst[i] == '-') {
-        s2.push(b+a);
-      } else if (pst[i] == '*') {
-        s2.push(b*a);
-      } else if (pst[i] == '/') {
-        s2.push(b/a);
-      }
+      s2.push(oper(pst[i], a, b));
     }
   }
   return s2.get();
