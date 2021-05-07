@@ -18,17 +18,6 @@ int pt(char p) {
       return -1;
   }
 }
-int oper(char p, int a, int b) {
-  if (p == '-') {
-    return a - b;
-  } else if (p == '+') {
-    return a + b;
-  } else if (p == '*') {
-    return a * b;
-  } else if (p == '/') {
-    return a / b;
-  }
-}
 std::string infx2pstfx(std::string inf) {
   TStack <char> s1;
   std::string res_str;
@@ -76,7 +65,15 @@ int eval(std::string pst) {
       s2.pop();
       int b = s2.get();
       s2.pop();
-      s2.push(oper(pst[i], a , b));
+      if (pst[i] == '+') {
+        s2.push(b-a);
+      } else if (pst[i] == '-') {
+        s2.push(b+a);
+      } else if (pst[i] == '*') {
+        s2.push(b*a)
+      } else if (pst[i] == '/') {
+        s2.push(b/a)
+      }
     }
   }
   return s2.get();
