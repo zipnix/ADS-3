@@ -2,27 +2,32 @@
 #include <string>
 #include "tstack.h"
 
-int pr(char p) {
-  if ((p == '-') || (p == '+'))
-    return 2;
-  if ((p == '*') || (p == '/'))
+int pt(char p) {
+  switch (p) {
+    case '(':
+      return 0;
+    case ')':
+      return 1;
+    case '-':
+    case '+':
+      return 2;
+    case '*':
+    case '/':
       return 3;
-  if (p == ')')
-    return 1;
-  if (p == '(')
-    return 0;
-  else
-    return -1;
+    default:
+      return -1;
+  }
 }
 int oper(char p, int a, int b) {
-  if (p == '-')
+  if (p == '-') {
     return a - b;
-  if (p == '+')
+  } else if (p == '+') {
     return a + b;
-  if (p == '*')
+  } else if (p == '*') {
     return a * b;
-  if (p == '/')
+  } else if (p == '/') {
     return a / b;
+  }
 }
 std::string infx2pstfx(std::string inf) {
   TStack <char> s1;
@@ -31,7 +36,7 @@ std::string infx2pstfx(std::string inf) {
     if ((inf[i] >= '0') && (inf[i] <= '9')) {
       res_str += inf[i];
       res_str += ' ';
-    } else if ((inf[i] == '(') || (pr(inf[i]) > pr(s1.get())) || (s1.isEmpty())
+    } else if ((inf[i] == '(') || (pt(inf[i]) > pt(s1.get())) || (s1.isEmpty())
               ) {
       s1.push(inf[i]);
       } else if (inf[i] == ')'
@@ -41,8 +46,11 @@ std::string infx2pstfx(std::string inf) {
         res_str += ' ';
         s1.pop();
       }
+      if (s1.get() == '(') {
+        s1.pop();
+      }
     } else {
-      while ((pr(inf[i]) <= pr(s1.get())) && (!s1.isEmpty())) {
+      while ((pt(inf[i]) <= pt(s1.get())) && (!s1.isEmpty())) {
         res_str += s1.get();
         res_str += ' ';
         s1.pop();
