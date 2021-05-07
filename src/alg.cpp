@@ -70,9 +70,9 @@ int eval(std::string pst) {
       } else if (pst[i] == '-') {
         s2.push(b+a);
       } else if (pst[i] == '*') {
-        s2.push(b*a)
+        s2.push(b*a);
       } else if (pst[i] == '/') {
-        s2.push(b/a)
+        s2.push(b/a);
       }
     }
   }
