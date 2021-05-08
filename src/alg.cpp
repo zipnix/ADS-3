@@ -9,30 +9,16 @@ int pt(char p) {
     case ')':
       return 1;
     case '-':
+      return 2;
     case '+':
       return 2;
     case '*':
+      return 3;
     case '/':
       return 3;
     default:
       return -1;
   }
-}
-int oper(char o, int a, int b) {
-    switch (o) {
-      case '+':
-        return a + b;
-        break;
-      case '-':
-        return a - b;
-        break;
-      case '*':
-        return a * b;
-        break;
-      case '/':
-        return a / b;
-        break;
-    }
 }
 std::string infx2pstfx(std::string inf) {
   TStack <char> s1;
@@ -76,13 +62,20 @@ int eval(std::string pst) {
   for (int i = 0; i < pst.length(); i++) {
     if ((pst[i] >= '0') && (pst[i] <= '9')) {
       s2.push(pst[i] - '0');
-    } else if (pst[i] != ' '
-            ) {
+    } else if (pst[i] != ' ') {
       int a = s2.get();
       s2.pop();
       int b = s2.get();
       s2.pop();
-      s2.push(oper(pst[i], a, b));
+      if (pst[i] == '+') {
+        s2.push(b + a);
+      } else if (pst[i] == '-') {
+        s2.push(b - a);
+      } else if (pst[i] == '*') {
+        s2.push(b * a);
+      } else {
+        s2.push(b / a);
+      }
     }
   }
   return s2.get();
