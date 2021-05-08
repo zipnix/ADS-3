@@ -2,8 +2,7 @@
 #include <string>
 #include "tstack.h"
 
-std::string infx2pstfx(std::string inf) {
-  int pt(char p) {
+int pt(char p) {
   switch (p) {
     case '(':
       return 0;
@@ -19,6 +18,23 @@ std::string infx2pstfx(std::string inf) {
       return -1;
   }
 }
+int oper(char o, int a, int b) {
+    switch (o) {
+      case '+':
+        return a + b;
+        break;
+      case '-':
+        return a - b;
+        break;
+      case '*':
+        return a * b;
+        break;
+      case '/':
+        return a / b;
+        break;
+    }
+}
+std::string infx2pstfx(std::string inf) {
   TStack <char> s1;
   std::string res_str;
   for (int i = 0; i < inf.length(); i++) {
@@ -56,21 +72,6 @@ std::string infx2pstfx(std::string inf) {
   return res_str;
 }
 int eval(std::string pst) {
-  int oper(char o, int a, int b) {
-    switch (o) {
-      case '+':
-        return a + b;
-        break;
-      case '-':
-        return a - b;
-        break;
-      case '*':
-        return a * b;
-        break;
-      case '/':
-        return a / b;
-        break;
-    }
   TStack <int> s2;
   for (int i = 0; i < pst.length(); i++) {
     if ((pst[i] >= '0') && (pst[i] <= '9')) {
